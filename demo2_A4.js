@@ -1470,7 +1470,7 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 				thisGame.gameMusic.volume = 0.6;
 				player.gotoAndPlay("explode");
 				createjs.Sound.play("gameOverSound");
-				setTimeout(resumeGameSound, 4000);
+				setTimeout(resumeGameSound, 3000);
 				player.isAlive = false;
 				player.direction = STOP;
 				player.maxSpeed = false;
@@ -2147,7 +2147,7 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 		function getName()
 		{	
 			playerName = document.getElementById("playerName").value;
-			alert("Congrats " + playerName + "!");
+			alert("Congrats " + playerName + "! You earned " + thisGame.score);
 		}
 	}
 
