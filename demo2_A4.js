@@ -2147,7 +2147,7 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 		function getName()
 		{	
 			playerName = document.getElementById("playerName").value;
-			alert("Congrats " + playerName + "! You earned " + thisGame.score);
+			alert("Congrats " + playerName + "!");
 		}
 	}
 
