@@ -10,7 +10,7 @@ var tFontsUpdateCacheList = [];
 lib.ssMetadata = [
 		{name:"demo2_A4_atlas_", frames: [[0,0,1174,1044]]},
 		{name:"demo2_A4_atlas_2", frames: [[1002,952,900,900],[0,0,1000,1200],[1002,0,900,950],[651,1596,346,176],[0,1202,600,600],[651,1854,328,173],[651,1380,311,214],[0,1804,649,205],[602,1202,391,176]]},
-		{name:"demo2_A4_atlas_3", frames: [[970,62,50,50],[852,167,160,124],[0,370,130,110],[590,246,160,124],[384,264,160,124],[752,293,160,124],[678,372,70,90],[822,419,80,70],[914,293,90,220],[132,370,70,160],[750,419,70,90],[543,524,60,60],[300,433,60,80],[204,433,60,80],[818,0,150,165],[454,112,134,150],[471,390,70,150],[546,372,130,150],[222,112,230,110],[222,0,362,110],[586,0,230,110],[362,433,56,66],[773,112,40,50],[970,0,50,60],[970,114,40,50],[300,515,144,25],[0,242,382,126],[678,515,343,50],[58,508,53,19],[0,532,298,33],[204,390,265,41],[384,224,63,24],[0,0,220,240],[678,491,57,19],[590,112,95,25],[678,464,69,25],[0,567,395,18],[0,482,122,24],[752,246,90,30],[683,139,86,25],[822,491,87,19],[300,542,56,19],[687,112,84,25],[590,139,91,25],[397,542,79,24],[0,508,56,19],[590,167,260,77]]}
+		{name:"demo2_A4_atlas_3", frames: [[970,62,50,50],[852,167,160,124],[0,370,130,110],[590,246,160,124],[384,264,160,124],[752,293,160,124],[678,372,70,90],[822,419,80,70],[914,293,90,220],[132,370,70,160],[750,419,70,90],[543,524,60,60],[300,433,60,80],[204,433,60,80],[818,0,150,165],[454,112,134,150],[471,390,70,150],[546,372,130,150],[222,112,230,110],[222,0,362,110],[586,0,230,110],[362,433,56,66],[970,114,40,50],[970,0,50,60],[764,112,40,50],[300,515,144,25],[0,242,382,126],[678,515,343,50],[300,542,53,19],[0,532,298,33],[204,390,265,41],[384,224,63,24],[605,524,54,25],[0,0,220,240],[678,491,57,19],[678,464,69,25],[0,567,395,18],[0,482,122,24],[752,246,90,30],[590,139,86,25],[822,491,87,19],[0,508,56,19],[678,139,84,25],[590,112,91,25],[683,112,79,24],[58,508,56,19],[590,167,260,77]]}
 ];
 
 
@@ -340,21 +340,21 @@ lib.tfontAvailable = function(family, totalTypekitCount) {
 
 
 
-(lib.keyboard = function() {
+(lib.info = function() {
 	this.initialize(ss["demo2_A4_atlas_3"]);
 	this.gotoAndStop(32);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.lastPage = function() {
+(lib.keyboard = function() {
 	this.initialize(ss["demo2_A4_atlas_3"]);
 	this.gotoAndStop(33);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.manual = function() {
+(lib.lastPage = function() {
 	this.initialize(ss["demo2_A4_atlas_3"]);
 	this.gotoAndStop(34);
 }).prototype = p = new cjs.Sprite();
@@ -587,6 +587,19 @@ p.draw = _componentDraw;
 	this._renderFirstFrame();
 
 }).prototype = getMCSymbolPrototype(lib.Symbol1, new cjs.Rectangle(0,0,65,55), null);
+
+
+(lib.SubmitText = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// Layer_1
+	this.instance = new lib.submit();
+
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
+
+	this._renderFirstFrame();
+
+}).prototype = getMCSymbolPrototype(lib.SubmitText, new cjs.Rectangle(0,0,79,24), null);
 
 
 (lib.nextText = function(mode,startPosition,loop) {
@@ -1541,6 +1554,11 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 			}
 			else if (e.keyCode == 40) // down button pressed
 			{
+				if(moveSound != null)
+				{
+					moveSound.stop();
+				}
+				
 				player.direction = STOP;
 			}
 		}
@@ -2128,26 +2146,42 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 		thisGame.home.addEventListener("click", goHome);
 		thisGame.submitName.addEventListener("click", getName);
 		
-		var playerName;
+		var playerName = null;
 		
 		function playAgain()
 		{
 			thisGame.gameMusic.stop();
-			thisGame.playAgain.removeEventListener("click", playAgain);
+			thisGame.removeAllEventListeners();
+			thisGame.submitName.visible = true;
+			thisGame.submitText.visible = true;
+			if(playerName != null)
+			{
+				playerName.disabled = false;
+			}
 			thisGame.gotoAndStop("play");
 		}
 		
 		function goHome()
 		{
 			thisGame.gameMusic.stop();
-			thisGame.home.removeEventListener("click", goHome);
+			thisGame.removeAllEventListeners();
+			thisGame.submitName.visible = true;
+			thisGame.submitText.visible = true;
+			if(playerName != null)
+			{
+				playerName.disabled = false;
+			}
 			thisGame.gotoAndStop("intro");
 		}
 		
 		function getName()
 		{	
-			playerName = document.getElementById("playerName").value;
-			alert("Congrats " + playerName + "!");
+			playerName = document.getElementById("playerName");
+			alert("Congratulations " + playerName.value + "! You earned " + thisGame.score + " points!");
+			thisGame.submitName.visible = false;
+			thisGame.submitText.visible = false;
+			thisGame.submitName.removeEventListener("click", getName);
+			playerName.disabled = true;
 		}
 	}
 
@@ -2155,8 +2189,8 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(5).call(this.frame_5).wait(5).call(this.frame_10).wait(5).call(this.frame_15).wait(5));
 
 	// main_layer
-	this.instance = new lib.manual();
-	this.instance.setTransform(523,361);
+	this.instance = new lib.info();
+	this.instance.setTransform(541,361);
 
 	this.instance_1 = new lib.start();
 	this.instance_1.setTransform(293,361);
@@ -2236,8 +2270,9 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 	this.instance_9 = new lib.MissileGreyed();
 	this.instance_9.setTransform(870,110);
 
-	this.instance_10 = new lib.submit();
-	this.instance_10.setTransform(413,278);
+	this.submitText = new lib.SubmitText();
+	this.submitText.name = "submitText";
+	this.submitText.setTransform(452.5,290,1,1,0,0,0,39.5,12);
 
 	this.submitName = new lib.button();
 	this.submitName.name = "submitName";
@@ -2249,11 +2284,11 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 	this.playerName.name = "playerName";
 	this.playerName.setTransform(450,236,1,1,0,0,0,50,11);
 
-	this.instance_11 = new lib.homeText();
-	this.instance_11.setTransform(514,406,0.873,0.8333);
+	this.instance_10 = new lib.homeText();
+	this.instance_10.setTransform(514,406,0.873,0.8333);
 
-	this.instance_12 = new lib.playAgain();
-	this.instance_12.setTransform(312,406,0.8197,0.8333);
+	this.instance_11 = new lib.playAgain();
+	this.instance_11.setTransform(312,406,0.8197,0.8333);
 
 	this.home = new lib.button();
 	this.home.name = "home";
@@ -2265,16 +2300,16 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 	this.playAgain.setTransform(360,415);
 	new cjs.ButtonHelper(this.playAgain, 0, 1, 2);
 
-	this.instance_13 = new lib.pointsText();
-	this.instance_13.setTransform(478,159,0.7778,0.8333);
+	this.instance_12 = new lib.pointsText();
+	this.instance_12.setTransform(478,159,0.7778,0.8333);
 
-	this.instance_14 = new lib.gameOverTwo();
-	this.instance_14.setTransform(320,50);
+	this.instance_13 = new lib.gameOverTwo();
+	this.instance_13.setTransform(320,50);
 
-	this.instance_15 = new lib.CachedBmp_1();
-	this.instance_15.setTransform(225,12.5,0.5,0.5);
+	this.instance_14 = new lib.CachedBmp_1();
+	this.instance_14.setTransform(225,12.5,0.5,0.5);
 
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_2},{t:this.start},{t:this.manual},{t:this.instance_1},{t:this.instance}]}).to({state:[{t:this.instance_3}]},5).to({state:[{t:this.instance_9},{t:this.instance_8},{t:this.missileOne},{t:this.scoreText,p:{x:885,y:462.7,text:"0",lineWidth:160}},{t:this.instance_7},{t:this.heartOne},{t:this.instance_6},{t:this.heartTwo},{t:this.instance_5},{t:this.heartThree},{t:this.missileTwo},{t:this.instance_4},{t:this.nextButton},{t:this.nextText}]},5).to({state:[{t:this.instance_15},{t:this.instance_14},{t:this.scoreText,p:{x:464.05,y:162,text:"",lineWidth:156}},{t:this.instance_13},{t:this.playAgain},{t:this.home},{t:this.instance_12},{t:this.instance_11},{t:this.playerName},{t:this.submitName},{t:this.instance_10}]},5).wait(5));
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_2},{t:this.start},{t:this.manual},{t:this.instance_1},{t:this.instance}]}).to({state:[{t:this.instance_3}]},5).to({state:[{t:this.instance_9},{t:this.instance_8},{t:this.missileOne},{t:this.scoreText,p:{x:885,y:462.7,text:"0",lineWidth:160}},{t:this.instance_7},{t:this.heartOne},{t:this.instance_6},{t:this.heartTwo},{t:this.instance_5},{t:this.heartThree},{t:this.missileTwo},{t:this.instance_4},{t:this.nextButton},{t:this.nextText}]},5).to({state:[{t:this.instance_14},{t:this.instance_13},{t:this.scoreText,p:{x:464.05,y:162,text:"",lineWidth:156}},{t:this.instance_12},{t:this.playAgain},{t:this.home},{t:this.instance_11},{t:this.instance_10},{t:this.playerName},{t:this.submitName},{t:this.submitText}]},5).wait(5));
 
 	// mask_play (mask)
 	var mask = new cjs.Shape();
@@ -2310,14 +2345,14 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[]}).to({state:[{t:this.player},{t:this.explosion}]},10).to({state:[]},5).wait(5));
 
 	// main_background
-	this.instance_16 = new lib.IntroBG();
-	this.instance_16.setTransform(263.55,257.3,1,1,0,0,0,-21.8,-66.5);
+	this.instance_15 = new lib.IntroBG();
+	this.instance_15.setTransform(263.55,257.3,1,1,0,0,0,-21.8,-66.5);
 
 	this.background = new lib.Background();
 	this.background.name = "background";
 	this.background.setTransform(450,250);
 
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_16}]}).to({state:[{t:this.background}]},10).wait(10));
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_15}]}).to({state:[{t:this.background}]},10).wait(10));
 
 	this._renderFirstFrame();
 
