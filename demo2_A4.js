@@ -2218,6 +2218,7 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 					removeFireBall(dragon);
 				}
 				
+				// If missile hits a fireball
 				missileArray.forEach(missile => {
 					if (missile.y - missile.halfHeight < dragon.fireBall.y + dragon.fireBall.halfHeight - 10
 					&& (missile.x >= dragon.fireBall.x - dragon.fireBall.halfWidth
@@ -2242,7 +2243,7 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 						
 						missile.explosion = new lib.missileFireBall();
 						missile.explosion.x = dragon.fireBall.x;
-						missile.explosion.y = dragon.fireBall.y;
+						missile.explosion.y = dragon.fireBall.y + dragon.fireBall.halfHeight;
 						stage.addChild(missile.explosion);
 						
 						removeFireBall(dragon);
