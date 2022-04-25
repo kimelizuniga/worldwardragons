@@ -1,11 +1,14 @@
 let highScoreBtn = document.getElementById("highScore");
 let modal = document.getElementById("myModal");
 let closeBtn = document.getElementById("close");
-let isOpen = false;
+
+let currentYear = document.getElementById("currentYear");
 
 highScoreBtn.addEventListener("mouseenter", enableBtn);
 highScoreBtn.addEventListener("click", showModal);
 closeBtn.addEventListener("click", closeModal);
+
+currentYear.innerHTML = new Date().getFullYear();
 
 function showModal()
 {

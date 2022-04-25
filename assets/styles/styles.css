@@ -16,6 +16,14 @@ button {
     cursor: pointer;
 }
 
+footer {
+    text-align: center;
+    position: fixed;
+    width: 80%;
+    top: 95%;
+    left: calc(50% - 40%);
+}
+
 .button {
     position: absolute;
     top: calc(50% - 300px);

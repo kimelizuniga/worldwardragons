@@ -164,6 +164,9 @@ function playSound(id, loop) {
 	</div>
     <div id='_preload_div_' style='position:absolute; top:0; left:0; display: inline-block; height:500px; width: 900px; text-align: center;'>	<span style='display: inline-block; height: 100%; vertical-align: middle;'></span>	<img src=images/_preloader.gif style='vertical-align: middle; max-height: 100%'/></div>
 
+	<footer>
+		© <span id="currentYear"></span> Kim Zuniga
+	</footer>
 	<script src="assets/scripts/index.js"></script>
 	<script
   src="https://code.jquery.com/jquery-3.6.0.js"
