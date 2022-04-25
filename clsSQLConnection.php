@@ -32,7 +32,7 @@ class clsSQLConnection
     public function GetData()
     {
         $conn = $this->CreateConnection();
-        $TableName = 'highscore';
+        $TableName = 'ww_dragons';
     
         $query = "Select user_name, score from $TableName order by score desc limit 10";
         $stmt = $conn->prepare($query);
@@ -57,7 +57,7 @@ class clsSQLConnection
     public function InsertData($userName, $score)
     {
         $conn = $this->CreateConnection();
-        $TableName = 'highscore';
+        $TableName = 'ww_dragons';
         
         $query = "Insert into $TableName (user_name, score)
                                         Values (?, ?)";
