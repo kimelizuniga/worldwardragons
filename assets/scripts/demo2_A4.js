@@ -2351,10 +2351,11 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 			}
 			else
 			{
+				var timeStamp = new Date();
 				$.ajax({
 					url: "highscore.php",
 					method: "post",
-					data: {"userName": playerName.value.toUpperCase(), "score": thisGame.score},
+					data: {"userName": playerName.value.toUpperCase(), "score": thisGame.score, "date_played": timeStamp},
 					success: {}
 				});
 

@@ -85,6 +85,18 @@ footer {
     cursor: pointer;
 }
 
+.mobile-controls {
+    text-align: center;
+    position: absolute;
+    width: 50%;
+    top: 70%;
+    left: calc(50% - 25%);
+}
+
+.mobile-controls > section {
+    margin-bottom: 2em;
+}
+
 #playerName {
     text-align: center;
 }
