@@ -8,7 +8,7 @@ highScoreBtn.addEventListener("mouseenter", enableBtn);
 highScoreBtn.addEventListener("click", showModal);
 closeBtn.addEventListener("click", closeModal);
 
-currentYear.innerHTML = new Date().getFullYear();
+currentYear.innerHTML = new Date().getFullYear();   
 
 function showModal()
 {
