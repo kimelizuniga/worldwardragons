@@ -13,6 +13,11 @@
 <meta name="authoring-tool" content="Adobe_Animate_CC">
 <title>World War Dragons</title>
 <!-- write your code here -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+
 <style>
   #animation_container, #_preload_div_ {
 	position:absolute;
@@ -21,6 +26,7 @@
 	top:0;bottom:0;
   }
 </style>
+<link rel="stylesheet" href="assets/styles/styles.css">
 <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
 <script>
 function LoadGFonts(families, comp) {				
@@ -73,7 +79,8 @@ function isFontAvailable(font, obj) {
 	var gFontsFamilies = ["Press Start 2P"];
 </script>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Press+Start+2P:regular&subset=latin">
-<script src="demo2_A4.js"></script>
+<script src="assets/scripts/demo2_A4.js"></script>
+
 <script>
 var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
 function init() {
@@ -138,11 +145,29 @@ function playSound(id, loop) {
 <!-- write your code here -->
 </head>
 <body onload="init();" style="margin:0px;">
+	<div class="button">
+		<button tabindex="-1" id="highScore">VIEW HIGHSCORE</button>
+	</div>
+	<div id="myModal" class="modal">
+		<section class="modal-content">
+			<span id="close" class="close">&times;</span>
+			<h3>High Score</h3>
+			<div id="row" class="row">
+				
+			</div>
+		</section>
+	</div>
 	<div id="animation_container" style="background-color:rgba(51, 204, 255, 1.00); width:900px; height:500px">
 		<canvas id="canvas" width="900" height="500" style="position: absolute; display: none; background-color:rgba(51, 204, 255, 1.00);"></canvas>
 		<div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:900px; height:500px; position: absolute; left: 0px; top: 0px; display: none;">
 		</div>
 	</div>
     <div id='_preload_div_' style='position:absolute; top:0; left:0; display: inline-block; height:500px; width: 900px; text-align: center;'>	<span style='display: inline-block; height: 100%; vertical-align: middle;'></span>	<img src=images/_preloader.gif style='vertical-align: middle; max-height: 100%'/></div>
+
+	<script src="assets/scripts/index.js"></script>
+	<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
 </body>
 </html>

@@ -2334,11 +2334,26 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 		function getName()
 		{	
 			playerName = document.getElementById("playerName");
-			alert("Congratulations " + playerName.value + "! You earned " + thisGame.score + " points!");
-			thisGame.submitName.visible = false;
-			thisGame.submitText.visible = false;
-			thisGame.submitName.removeEventListener("click", getName);
-			playerName.disabled = true;
+
+			if(playerName.value.length > 10)
+			{
+				alert("Name can't be more than 10 characters.")
+			}
+			else
+			{
+				$.ajax({
+					url: "highscore.php",
+					method: "post",
+					data: {"userName": playerName.value, "score": thisGame.score},
+					success: {}
+				});
+	
+				document.getElementById("highScore").click();
+				thisGame.submitName.visible = false;
+				thisGame.submitText.visible = false;
+				thisGame.submitName.removeEventListener("click", getName);
+				playerName.disabled = true;
+			}
 		}
 	}
 
