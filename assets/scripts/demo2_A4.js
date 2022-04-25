@@ -1417,7 +1417,6 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 		thisGame = this;
 		thisGame.stop();
 		thisGame.score;
-		console.log("Here at play frame");
 		// Game Music
 		// Enables the music to loop
 		var props = new createjs.PlayPropsConfig().set({interrupt: createjs.Sound.INTERRUPT_ANY, loop: -1, volume: 0.8})
@@ -1679,7 +1678,6 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 		{
 			if  (e.keyCode==37 && player.x > stageLeft + player.halfWidth && player.isAlive == true)  // left arrow pressed
 			{
-				console.log(player.speed);
 				if (player.direction != WEST)
 				{
 					if(moveSound == null)
@@ -2317,9 +2315,8 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 	this.frame_20 = function() {
 		thisGame.stop();
 		thisGame.scoreText.text = thisGame.score;
-		
 		var playerName = null;
-		
+
 		thisGame.home.addEventListener("click", goHome);
 		thisGame.submitName.addEventListener("click", getName);
 		
@@ -2341,6 +2338,7 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 		function getName()
 		{	
 			playerName = document.getElementById("playerName");
+			playerName.autocomplete = 'off';
 
 			if(playerName.value.length > 3)
 			{
@@ -2493,7 +2491,7 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 	this.submitName.setTransform(450,290);
 	new cjs.ButtonHelper(this.submitName, 0, 1, 2);
 
-	this.playerName = new lib.an_TextInput({'id': 'playerName', 'value':'', 'disabled':false, 'visible':true, 'autocomplete': false, 'class':'ui-textinput'});
+	this.playerName = new lib.an_TextInput({'id': 'playerName', 'value':'', 'disabled':false, 'visible':true, 'class':'ui-textinput'});
 
 	this.playerName.name = "playerName";
 	this.playerName.setTransform(450,236,1,1,0,0,0,50,11);
