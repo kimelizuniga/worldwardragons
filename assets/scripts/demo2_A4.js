@@ -796,6 +796,13 @@ p.nominalBounds = new cjs.Rectangle(-34.4,-45,75,82.5);
 p.nominalBounds = new cjs.Rectangle(-32.5,-37.5,65,75);
 
 
+(lib.an_CSS = function(options) {
+	this.initialize();
+	this._element = new $.an.CSS(options);
+	this._el = this._element.create();
+}).prototype = p = new cjs.MovieClip();
+p.nominalBounds = new cjs.Rectangle(0,0,100,22);
+
 (lib.Clouds = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
 
@@ -2335,20 +2342,26 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 		{	
 			playerName = document.getElementById("playerName");
 
-			if(playerName.value.length > 10)
+			if(playerName.value.length > 3)
 			{
-				alert("Name can't be more than 10 characters.")
+				alert("Name can't be more than 3 characters.")
+			}
+			else if(playerName.value.toUpperCase() == "SHT" || playerName.value.toUpperCase() == "FCK")
+			{
+				// FILTER
+				alert("Invalid name!");
 			}
 			else
 			{
 				$.ajax({
 					url: "highscore.php",
 					method: "post",
-					data: {"userName": playerName.value, "score": thisGame.score},
+					data: {"userName": playerName.value.toUpperCase(), "score": thisGame.score},
 					success: {}
 				});
+
+				setTimeout(clickBtn, 600);
 	
-				document.getElementById("highScore").click();
 				thisGame.submitName.visible = false;
 				thisGame.submitText.visible = false;
 				thisGame.submitName.removeEventListener("click", getName);
@@ -2357,8 +2370,21 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 		}
 	}
 
+	function clickBtn()
+	{
+		document.getElementById("highScore").click();
+	}
+
 	// actions tween:
 	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(5).call(this.frame_5).wait(5).call(this.frame_10).wait(5).call(this.frame_15).wait(5).call(this.frame_20).wait(5));
+
+	// actions
+	this.instance = new lib.an_CSS({'id': '', 'href':'assets/styles/styles.css'});
+
+	this.instance.setTransform(980.2,157.9,1,1,0,0,0,50,11);
+	this.instance._off = true;
+
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(15).to({_off:false},0).to({_off:true},5).wait(5));
 
 	// main_layer
 	this.instance = new lib.info();
@@ -2467,7 +2493,7 @@ p.nominalBounds = new cjs.Rectangle(-250,-300,500,600);
 	this.submitName.setTransform(450,290);
 	new cjs.ButtonHelper(this.submitName, 0, 1, 2);
 
-	this.playerName = new lib.an_TextInput({'id': 'playerName', 'value':'', 'disabled':false, 'visible':true, 'class':'ui-textinput'});
+	this.playerName = new lib.an_TextInput({'id': 'playerName', 'value':'', 'disabled':false, 'visible':true, 'autocomplete': false, 'class':'ui-textinput'});
 
 	this.playerName.name = "playerName";
 	this.playerName.setTransform(450,236,1,1,0,0,0,50,11);
@@ -2560,7 +2586,8 @@ lib.properties = {
 		{src:"sounds/steerSound.mp3", id:"steerSound"},
 		{src:"https://code.jquery.com/jquery-3.4.1.min.js", id:"lib/jquery-3.4.1.min.js"},
 		{src:"components/sdk/anwidget.js", id:"sdk/anwidget.js"},
-		{src:"components/ui/src/textinput.js", id:"an.TextInput"}
+		{src:"components/ui/src/textinput.js", id:"an.TextInput"},
+		{src:"components/ui/src/css.js", id:"an.CSS"}
 	],
 	preloads: []
 };

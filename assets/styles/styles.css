@@ -84,3 +84,7 @@ footer {
     text-decoration: none;
     cursor: pointer;
 }
+
+#playerName {
+    text-align: center;
+}
