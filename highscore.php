@@ -5,8 +5,9 @@ if(isset($_POST['userName']))
 {
     $userName = $_POST['userName'];
     $score = $_POST['score'];
+    $timeStamp = $_POST['timeStamp'];
     $mysqlObj = new clsSQLConnection();
-    $mysqlObj->InsertData($userName, $score);
+    $mysqlObj->InsertData($userName, $score, $timeStamp);
 }
 else
 {

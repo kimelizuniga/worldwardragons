@@ -54,15 +54,15 @@ class clsSQLConnection
         $stmt->close();
     }
 
-    public function InsertData($userName, $score)
+    public function InsertData($userName, $score, $timeStamp)
     {
         $conn = $this->CreateConnection();
         $TableName = 'ww_dragons';
         
-        $query = "Insert into $TableName (user_name, score)
-                                        Values (?, ?)";
+        $query = "Insert into $TableName (user_name, score, date_played)
+                                        Values (?, ?, ?)";
         $stmt = $conn->prepare($query);
-        $BindSuccess = $stmt->bind_param("si", $userName, $score);
+        $BindSuccess = $stmt->bind_param("sis", $userName, $score, $timeStamp);
 
         if ($BindSuccess)
             $success = $stmt-> execute();

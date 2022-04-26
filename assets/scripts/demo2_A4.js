@@ -1417,7 +1417,6 @@
 			thisGame = this;
 			thisGame.stop();
 			thisGame.score;
-			console.log("Here at play frame");
 			// Game Music
 			// Enables the music to loop
 			var props = new createjs.PlayPropsConfig().set({interrupt: createjs.Sound.INTERRUPT_ANY, loop: -1, volume: 0.8})
@@ -1468,8 +1467,8 @@
 			// Score
 			var scoreText = thisGame.scoreText;
 			const baseScore = 50;
-			var scoreMultiplier = 1; // changes based on difficulty
-			var scoreReduction = 0.95; // reduce current score to this value
+			var scoreMultiplier; // changes based on difficulty
+			var scoreReduction;// reduce current score to this value
 			
 			// Base lives
 			var hearts = [thisGame.heartOne, thisGame.heartTwo, thisGame.heartThree];
@@ -1499,6 +1498,8 @@
 				
 				// initialize score to 0
 				thisGame.score = 0;
+				scoreMultiplier = 1;
+				scoreReduction = 0.95;
 				gameOverImage = null;
 				
 				// Next button
@@ -1679,7 +1680,6 @@
 			{
 				if  (e.keyCode==37 && player.x > stageLeft + player.halfWidth && player.isAlive == true)  // left arrow pressed
 				{
-					console.log(player.speed);
 					if (player.direction != WEST)
 					{
 						if(moveSound == null)
@@ -2000,7 +2000,7 @@
 				{
 					var rand = Math.floor(Math.random() * 300) + 1;
 					
-					if(rand > 280)
+					if(rand > 293)
 					{
 						if(dragon.horizontalSpeed == -(dragonSpeed + dragon.speed))
 						{
@@ -2107,6 +2107,14 @@
 							if (dragonKilled == 20)
 							{
 								dragonSpeed += dragonSpeed / 6;
+								scoreMultiplier += 0.5;
+								scoreReduction += 0.005;
+
+								if(scoreReduction >= 0.98)
+								{
+									scoreReduction = 0.98;
+								}
+
 								dragonKilled = 6;
 							}
 							
@@ -2134,6 +2142,7 @@
 							
 							generateDragon(dragon);
 							thisGame.score += (baseScore * scoreMultiplier);
+							console.log(baseScore * scoreMultiplier);
 						}
 				});
 				
@@ -2230,7 +2239,7 @@
 						if (missile.y - missile.halfHeight < dragon.fireBall.y + dragon.fireBall.halfHeight - 10
 						&& (missile.x >= dragon.fireBall.x - dragon.fireBall.halfWidth
 							&& missile.x <= dragon.fireBall.x + dragon.fireBall.halfWidth)
-						&& missile.collided == false
+						&& missile.collided == false && dragon.fireBall.y > dragon.y + 25
 						)
 						{
 							if(missile.explosion != null)
@@ -2351,11 +2360,14 @@
 				}
 				else
 				{
-					var timeStamp = new Date();
+					//var timeStamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
+					var timeStamp = new Date().toLocaleString('en-US', { timeZone: 'America/Toronto' });
+					console.log(timeStamp);
+
 					$.ajax({
 						url: "highscore.php",
 						method: "post",
-						data: {"userName": playerName.value.toUpperCase(), "score": thisGame.score, "date_played": timeStamp},
+						data: {"userName": playerName.value.toUpperCase(), "score": thisGame.score, "timeStamp": timeStamp},
 						success: {}
 					});
 	
