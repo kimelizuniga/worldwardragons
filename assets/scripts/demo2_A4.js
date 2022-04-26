@@ -1454,6 +1454,7 @@
 			//var dragon = thisGame.greenDragon;
 			var dragonSpeed;
 			var dragonKilled;
+			var createDragonThreshold;
 			var dragonCombo;
 			
 			// Direction where the player moves (left or right)
@@ -1499,7 +1500,7 @@
 				// initialize score to 0
 				thisGame.score = 0;
 				scoreMultiplier = 1;
-				scoreReduction = 0.95;
+				scoreReduction = 0.96;
 				gameOverImage = null;
 				
 				// Next button
@@ -1587,11 +1588,12 @@
 				
 				// Green dragon
 				numDragons = 1;
-				dragonSpeed = 4;
+				dragonSpeed = 3;
 				dragonKilled = 0;
 				dragonArray = [];
 				dragonCombo = 0;
 				dragonTrick = 0;
+				createDragonThreshold = 0;
 				createDragon();
 				fireBall = null;
 				
@@ -1931,7 +1933,7 @@
 			
 			function randomizeDragonSpeed(dragon)
 			{
-				dragon.speed = Math.floor(Math.random() * 2) + 1;
+				dragon.speed = Math.floor(Math.random() * 2) + 2;
 			}
 			
 			function createFireBall(dragon)
@@ -1943,7 +1945,7 @@
 				dragon.fireBall.y = dragon.y + dragon.halfHeight;
 				dragon.fireBall.halfWidth = dragon.fireBall.width / 2;
 				dragon.fireBall.halfHeight = dragon.fireBall.height / 2;
-				dragon.fireSpeed = dragonSpeed + 5;
+				dragon.fireSpeed = dragonSpeed + 6;
 				dragon.fired = true;
 				stage.addChild(dragon.fireBall);
 			}
@@ -2000,7 +2002,7 @@
 				{
 					var rand = Math.floor(Math.random() * 300) + 1;
 					
-					if(rand > 293)
+					if(rand > 295)
 					{
 						if(dragon.horizontalSpeed == -(dragonSpeed + dragon.speed))
 						{
@@ -2015,7 +2017,7 @@
 					}
 				}
 				else if(dragon.skill == 2 && dragon.usedSkill == false 
-						&& dragon.y > 0 && dragon.y < 300)
+						&& dragon.y > 0 && dragon.y < 250)
 				{
 					// Dragon's skill is fireball
 					var rand = Math.floor(Math.random() * 300) + 1;
@@ -2081,6 +2083,7 @@
 							missile.collided = true;
 							
 							dragonKilled++;
+							createDragonThreshold++;
 							dragonCombo++;
 							moveExplosion(dragon);
 							setTimeout(removeExplosion, 500, dragon);	
@@ -2104,10 +2107,12 @@
 								createDragon();
 							}
 							
+							// Increase difficulty
 							if (dragonKilled == 20)
 							{
 								dragonSpeed += dragonSpeed / 6;
-								scoreMultiplier += 0.2;
+								dragon.fireSpeed = dragonSpeed + 6;
+								scoreMultiplier += 0.5;
 								scoreReduction += 0.005;
 
 								if(scoreReduction >= 0.98)
@@ -2116,8 +2121,15 @@
 								}
 
 								dragonKilled = 6;
+
 							}
 							
+							// Generate new dragons
+							if(createDragonThreshold == 50)
+							{
+								createDragon();
+								createDragonThreshold = 0;
+							}
 							
 							// If player killed 5 dragons consecutively
 							if(dragonCombo >= 5)
@@ -2142,7 +2154,6 @@
 							
 							generateDragon(dragon);
 							thisGame.score += (baseScore * scoreMultiplier);
-							console.log(baseScore * scoreMultiplier);
 						}
 				});
 				
