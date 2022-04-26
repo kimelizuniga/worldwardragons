@@ -104,4 +104,5 @@ function closeModal()
 {
     modal.style.display = "none";
     highScoreBtn.disabled = false;
+    pageNum = 0;
 }
