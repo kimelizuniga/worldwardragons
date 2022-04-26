@@ -4,7 +4,7 @@ body {
 
 h3 {
     text-align: center;
-    color: #E8372D;
+    color: #EF4423;
     text-shadow: 2px 2px 2px white;
     margin-top: 0;
     margin-bottom: 1.5em;
@@ -17,6 +17,22 @@ button.highScore {
     height: 3em;
     cursor: pointer;
     user-select: none;
+    color: #FFF;
+    background-color: #4faf44;
+    border: none;
+    border-radius: 0.3em;
+    padding: 1em;
+    box-shadow: 3px 4px #999;
+}
+
+button.highScore:hover {
+    background-color: #4f8A44;
+}
+
+button.highScore:active {
+    background-color: #4f8A44;
+    box-shadow: 3px 2px #666;
+    transform: translateY(2px);
 }
 
 button.next, button.prev {
@@ -30,7 +46,7 @@ button.next, button.prev {
 }
 
 button.next:hover, button.prev:hover {
-    color: red;
+    color: #EF4423;
 }
 
 button.next:active, button.prev:active {
@@ -82,12 +98,12 @@ footer {
 
 .column {
     flex: 40%;
-    text-shadow: 1px 1px 1px #E8372D;
+    text-shadow: 1px 1px 1px #EF4423;
 }
 
 .column-rank {
     flex: 20%;
-    text-shadow: 1px 1px 1px #E8372D;
+    text-shadow: 1px 1px 1px #EF4423;
 }
 
 .userName {
@@ -105,6 +121,11 @@ footer {
 
 .rank-number::before {
     text-align: right;
+}
+
+.col-heading {
+    color: #4faf44;
+    text-shadow: 1px 1px 1px #FFF;
 }
 
 .close {
@@ -140,6 +161,12 @@ footer {
     height: 25px;
     top: calc(100% - 30px);
     left: calc(50% - 10%);
+}
+
+.version-num {
+    position: absolute;
+    font-size: 0.7em;
+    left: 100%;
 }
 
 #playerName {

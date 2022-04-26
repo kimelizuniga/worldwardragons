@@ -47,9 +47,9 @@ class clsSQLConnection
 
         
         echo "
-            <div class=\"column-rank rank-number\">RANK</div>
-            <div class=\"column userName\">NAME</div>
-            <div class=\"column score\">SCORE</div>
+            <div class=\"column-rank rank-number col-heading\">RANK</div>
+            <div class=\"column userName col-heading\">NAME</div>
+            <div class=\"column score col-heading\">SCORE</div>
         ";
 
         while($stmt->fetch())

@@ -11,7 +11,6 @@ let pageNeed;
 let prevBtn = document.getElementById('prev');
 let nextBtn = document.getElementById('next');
 
-highScoreBtn.addEventListener("mouseenter", enableBtn);
 highScoreBtn.addEventListener("click", showModal);
 closeBtn.addEventListener("click", closeModal);
 
@@ -91,18 +90,10 @@ function showModal()
 
     // Show highscore
     modal.style.display = "block";
-    // Disable button
-    highScoreBtn.disabled = true;
-}
-
-function enableBtn()
-{
-    highScoreBtn.disabled = false;
 }
 
 function closeModal()
 {
     modal.style.display = "none";
-    highScoreBtn.disabled = false;
     pageNum = 0;
 }
