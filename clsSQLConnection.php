@@ -39,7 +39,7 @@ class clsSQLConnection
         $limit = 10;
         $offset = $pageNum * 10;
 
-        $query = "Select user_name, score from $TableName 
+        $query = "Select user_name, score from $TableName where score > 0
                   order by score desc limit $limit offset $offset";
         $stmt = $conn->prepare($query);
         $stmt->execute();
@@ -77,7 +77,7 @@ class clsSQLConnection
         $conn = $this->CreateConnection();
         $TableName = 'ww_dragons';
 
-        $query = "Select COUNT(*) from $TableName order by score desc limit 50";
+        $query = "Select COUNT(*) from $TableName where score > 0 order by score desc limit 50";
         $stmt = $conn->prepare($query);
         $stmt->execute();
         $stmt->bind_result($count); 
