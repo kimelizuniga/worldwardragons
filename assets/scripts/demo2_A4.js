@@ -2135,7 +2135,7 @@
 								// Slow dragons down
 								if(dragonCount == 4 || dragonCount == 6)
 								{
-									dragonSpeed -= dragonSpeed / 4;
+									dragonSpeed -= dragonSpeed / 3;
 								}
 
 								createDragonThreshold = 0;
