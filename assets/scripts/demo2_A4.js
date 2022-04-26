@@ -2125,7 +2125,7 @@
 							}
 							
 							// Generate new dragons
-							if(createDragonThreshold == 50)
+							if(createDragonThreshold == 30)
 							{
 								createDragon();
 								createDragonThreshold = 0;
