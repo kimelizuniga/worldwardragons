@@ -1455,6 +1455,7 @@
 			var dragonSpeed;
 			var dragonKilled;
 			var createDragonThreshold;
+			var dragonCount;
 			var dragonCombo;
 			
 			// Direction where the player moves (left or right)
@@ -1594,6 +1595,7 @@
 				dragonCombo = 0;
 				dragonTrick = 0;
 				createDragonThreshold = 0;
+				dragonCount = 0;
 				createDragon();
 				fireBall = null;
 				
@@ -1929,6 +1931,7 @@
 				stage.addChild(dragon);
 				generateDragon(dragon);
 				dragonArray.push(dragon);
+				dragonCount++;
 			}
 			
 			function randomizeDragonSpeed(dragon)
@@ -2128,6 +2131,13 @@
 							if(createDragonThreshold == 30)
 							{
 								createDragon();
+
+								// Slow dragons down
+								if(dragonCount == 4 || dragonCount == 6)
+								{
+									dragonSpeed -= dragonSpeed / 4;
+								}
+
 								createDragonThreshold = 0;
 							}
 							
