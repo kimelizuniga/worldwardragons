@@ -18,10 +18,7 @@ closeBtn.addEventListener("click", closeModal);
 prevBtn.addEventListener("click", goPrev);
 nextBtn.addEventListener("click", goNext);
 
-
-
 currentYear.innerHTML = new Date().getFullYear();   
-
 
 function goPrev()
 {
