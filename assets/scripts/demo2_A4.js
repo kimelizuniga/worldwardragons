@@ -2107,7 +2107,7 @@
 							if (dragonKilled == 20)
 							{
 								dragonSpeed += dragonSpeed / 6;
-								scoreMultiplier += 0.5;
+								scoreMultiplier += 0.2;
 								scoreReduction += 0.005;
 
 								if(scoreReduction >= 0.98)
@@ -2150,7 +2150,7 @@
 				if (player.y - player.halfHeight < dragon.y + dragon.halfHeight - 10
 					&& (player.x >= dragon.x - dragon.halfWidth
 						&& player.x <= dragon.x + dragon.halfWidth)
-					&& player.isImmune == false
+					&& player.isImmune == false && dragon.y <= height
 					)
 				{
 					
@@ -2356,13 +2356,15 @@
 				
 				if(playerName.value.length > 8)
 				{
-					alert("Name can't be more than 8 characters.")
+					alert("Name can't be more than 8 characters.");
+				}
+				else if(playerName.value.trim().length == 0)
+				{
+					alert("Please enter a name.");
 				}
 				else
 				{
-					//var timeStamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
-					var timeStamp = new Date().toLocaleString('en-US', { timeZone: 'America/Toronto' });
-					console.log(timeStamp);
+					var timeStamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
 					$.ajax({
 						url: "highscore.php",
