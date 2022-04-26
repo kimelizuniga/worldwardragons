@@ -16,6 +16,7 @@ button.highScore {
     font-family: 'Press Start 2P', cursive;
     height: 3em;
     cursor: pointer;
+    user-select: none;
 }
 
 button.next, button.prev {
@@ -25,6 +26,7 @@ button.next, button.prev {
     background-color: rgba(0, 0, 0, 0.0);
     border: none;
     color: white;
+    user-select: none;
 }
 
 button.next:hover, button.prev:hover {

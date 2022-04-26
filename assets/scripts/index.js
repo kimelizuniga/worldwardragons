@@ -47,7 +47,7 @@ function goNext()
 
 function showModal()
 {
-    // Determine if left/right arrows appear
+    // Get number of rows in database
     $.ajax({
         async: false,
         url: "highscore.php",
