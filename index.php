@@ -10,10 +10,10 @@
 <html>
 <head>
 <?php 
-	header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-	header('Cache-Control: no-store, no-cache, must-revalidate');
-	header('Cache-Control: post-check=0, pre-check=0', FALSE);
-	header('Pragma: no-cache');
+	// Disable cache
+	header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+	header("Pragma: no-cache"); // HTTP 1.0.
+	header("Expires: 0"); // Proxies.
 ?>
 <meta charset="UTF-8">
 <meta name="authoring-tool" content="Adobe_Animate_CC">
@@ -152,7 +152,7 @@ function playSound(id, loop) {
 </head>
 <body onload="init();" style="margin:0px;">
 	<div class="button">
-		<button tabindex="-1" id="highScore">VIEW HIGHSCORE</button>
+		<button class="highScore" tabindex="-1" id="highScore">VIEW HIGHSCORE</button>
 	</div>
 	<div id="myModal" class="modal">
 		<section class="modal-content">
@@ -160,6 +160,15 @@ function playSound(id, loop) {
 			<h3>High Score</h3>
 			<div id="row" class="row">
 				
+			</div>
+			
+			<div class="score-nav row">
+				<div class="page-col">
+					<button id="prev" class="prev"><</button>
+				</div>
+				<div class="page-col">
+					<button id="next" class="next">></button>
+				</div>
 			</div>
 		</section>
 	</div>

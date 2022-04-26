@@ -6,15 +6,33 @@ h3 {
     text-align: center;
     color: #E8372D;
     text-shadow: 2px 2px 2px white;
-    margin-bottom: 2em;
+    margin-top: 0;
+    margin-bottom: 1.5em;
     padding-left: 2em;
 }
 
-button {
+button.highScore {
     text-align: center;
     font-family: 'Press Start 2P', cursive;
     height: 3em;
     cursor: pointer;
+}
+
+button.next, button.prev {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.3em;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.0);
+    border: none;
+    color: white;
+}
+
+button.next:hover, button.prev:hover {
+    color: red;
+}
+
+button.next:active, button.prev:active {
+    transform: translateY(2px);
 }
 
 footer {
@@ -51,24 +69,39 @@ footer {
 }
 
 .row {
-    width: 80%;
+    width: 100%;
+    font-size: 0.9em;
     margin: auto;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    row-gap: 1.2em;
+    row-gap: 1.5em;
 }
 
 .column {
-    flex: 50%;
+    flex: 40%;
+    text-shadow: 1px 1px 1px #E8372D;
+}
+
+.column-rank {
+    flex: 20%;
     text-shadow: 1px 1px 1px #E8372D;
 }
 
 .userName {
+    width: 75%;
     text-align: left;
 }
 
 .score {
+    text-align: right;
+}
+
+.rank-number {
+    text-align: center;
+}
+
+.rank-number::before {
     text-align: right;
 }
 
@@ -96,6 +129,15 @@ footer {
 
 .mobile-controls > section {
     margin-bottom: 2em;
+}
+
+.score-nav {
+    width: 20%;
+    padding-left: 1em;
+    position: absolute;
+    height: 25px;
+    top: calc(100% - 30px);
+    left: calc(50% - 10%);
 }
 
 #playerName {

@@ -2389,7 +2389,7 @@
 
 					$.ajax({
 						url: "highscore.php",
-						method: "post",
+						method: "POST",
 						data: {"userName": playerName.value.toUpperCase(), "score": thisGame.score, "timeStamp": timeStamp},
 						success: {}
 					});

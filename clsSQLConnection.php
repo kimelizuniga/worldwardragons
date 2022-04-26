@@ -29,21 +29,39 @@ class clsSQLConnection
     return $conn;
     }
 
-    public function GetData()
+    public function GetData($pageNum)
     {
         $conn = $this->CreateConnection();
         $TableName = 'ww_dragons';
-    
-        $query = "Select user_name, score from $TableName order by score desc limit 10";
+
+        $ranking = 10 * $pageNum;
+
+        $limit = 10;
+        $offset = $pageNum * 10;
+
+        $query = "Select user_name, score from $TableName 
+                  order by score desc limit $limit offset $offset";
         $stmt = $conn->prepare($query);
         $stmt->execute();
         $stmt->bind_result($UserName, $Score);
 
+        
+        echo "
+            <div class=\"column-rank rank-number\">RANK</div>
+            <div class=\"column userName\">NAME</div>
+            <div class=\"column score\">SCORE</div>
+        ";
+
         while($stmt->fetch())
         {
+            $ranking++;
+
             echo "
+                <div class=\"column-rank rank-number\">
+                    $ranking
+                </div>
                 <div class=\"column userName\">
-                    $UserName
+                        $UserName
                 </div>
                 <div class=\"column score\">
                     $Score
@@ -52,6 +70,21 @@ class clsSQLConnection
         }
 
         $stmt->close();
+    }
+
+    public function CountRows()
+    {
+        $conn = $this->CreateConnection();
+        $TableName = 'ww_dragons';
+
+        $query = "Select COUNT(*) from $TableName order by score desc limit 50";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $stmt->bind_result($count); 
+
+        $stmt->fetch();
+    
+        echo "$count";
     }
 
     public function InsertData($userName, $score, $timeStamp)
@@ -70,88 +103,6 @@ class clsSQLConnection
             echo "Bind failed" . $stmt->error;
 
         $stmt->close();
-    }
-
-    public function Register()
-    {
-        $conn = $this->CreateConnection();
-        $registered = false;
-        $TableName = "user_info";
-        $user_name = $_POST["f_UserName"];
-        $first_name = $_POST["f_FirstName"];
-        $last_name = $_POST["f_LastName"];
-        $user_pass = password_hash($_POST["f_Password"], PASSWORD_DEFAULT);
-        $dateRegistered = date('Y-m-d');
-
-        $query = "Insert into $TableName (user_name, first_name, last_name,
-                                          user_pass, user_registered)
-                                          Values (?, ?, ?, ?, ?)";
-
-        $stmt = $conn->prepare($query);
-        $BindSuccess = $stmt->bind_param("sssss",
-                                         $user_name, $first_name, $last_name,
-                                         $user_pass, $dateRegistered);
-                        
-        if ($BindSuccess)
-            $success = $stmt->execute();
-        else
-            echo "Bind failed" . $stmt->error;
-
-        if($success)
-        {
-            echo "<p class=\"success\">Registered Successfully</p>";
-            $registered = true;
-        }
-        else
-        {
-            $_SESSION["failed"] = true;
-            header("Location: ./register.php");
-        }
-
-        $stmt->close();
-
-        return $registered;
-    }
-
-    public function Login()
-    {
-        $conn = $this->CreateConnection();
-        $TableName = "user_info";
-        $userName = $_POST["f_UserName"];
-        $userPass = $_POST["f_Password"];
-        $authenticated = false;
-
-        $query = "Select user_name, user_pass from $TableName where user_name = ?";
-        $stmt = $conn->prepare($query);
-
-        $BindSuccess = $stmt->bind_param("s", $userName);
-
-        if ($BindSuccess)
-            $success = $stmt->bind_result($user_name, $user_pass);
-        else
-            echo "Bind failed";
-
-        if ($success)
-            $stmt->execute();
-        else
-            echo "Bind failed";
-
-        $stmt->fetch();
-
-        if(password_verify($userPass, $user_pass))
-        {
-            $_SESSION["login"] = true;
-            $authenticated = true;
-            if(session_status() == PHP_SESSION_NONE)
-                session_start();
-            $_SESSION["userName"] =  $userName;
-        }
-        else
-            echo "<div><p class=\"warning\">Failed login attempt</p></div>";
-
-        $stmt->close();
-
-        return $authenticated;
     }
 }
 

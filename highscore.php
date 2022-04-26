@@ -9,10 +9,16 @@ if(isset($_POST['userName']))
     $mysqlObj = new clsSQLConnection();
     $mysqlObj->InsertData($userName, $score, $timeStamp);
 }
+else if(isset($_POST['pageNum']))
+{
+    $pageNum = $_POST['pageNum'];
+    $mysqlObj = new clsSQLConnection();
+    $mysqlObj->GetData($pageNum);
+}
 else
 {
     $mysqlObj = new clsSQLConnection();
-    $mysqlObj->GetData();
+    $mysqlObj->CountRows();
 }
 
 ?>
