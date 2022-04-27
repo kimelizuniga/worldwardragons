@@ -14,14 +14,13 @@ h3 {
 button.highScore {
     text-align: center;
     font-family: 'Press Start 2P', cursive;
-    height: 3em;
+    height: 2em;
     cursor: pointer;
     user-select: none;
     color: #FFF;
     background-color: #4faf44;
     border: none;
     border-radius: 0.3em;
-    padding: 1em;
     box-shadow: 3px 4px #999;
 }
 
@@ -63,7 +62,7 @@ footer {
 
 .button {
     position: absolute;
-    top: calc(50% - 300px);
+    top: calc(50% - 290px);
     left: 50%;
     -ms-transform: translate(-50%);
     transform: translate(-50%);
@@ -155,12 +154,23 @@ footer {
 }
 
 .score-nav {
-    width: 20%;
-    padding-left: 1em;
+    width: 30%;
     position: absolute;
     height: 25px;
     top: calc(100% - 30px);
-    left: calc(50% - 10%);
+    left: calc(50% - 18%);
+}
+
+.next {
+    position: absolute;
+    width: 50px;
+    left: calc(50% + 50px);
+}
+
+.prev {
+    position: absolute;
+    width: 50px;
+    left: calc(50% - 50px);
 }
 
 .version-num {
