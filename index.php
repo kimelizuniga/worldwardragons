@@ -193,7 +193,7 @@ function playSound(id, loop) {
 	</div> -->
 	<footer>
 		© <span id="currentYear"></span> Kim Zuniga
-		<p class="version-num">v.1.0.1</p>
+		<span class="version-num">v.1.0.1</span>
 	</footer>
 	<script src="assets/scripts/index.js"></script>
 	<script
