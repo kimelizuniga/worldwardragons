@@ -60,6 +60,11 @@ function getNumRows()
             numRows = data;
         }
     });
+
+    if(numRows > 50)
+    {
+        numRows = 50;
+    }
 }
 
 function getData()
