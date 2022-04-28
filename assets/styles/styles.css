@@ -11,29 +11,6 @@ h3 {
     padding-left: 2em;
 }
 
-button.highScore {
-    text-align: center;
-    font-family: 'Press Start 2P', cursive;
-    height: 2em;
-    cursor: pointer;
-    user-select: none;
-    color: #FFF;
-    background-color: #4faf44;
-    border: none;
-    border-radius: 0.3em;
-    box-shadow: 3px 4px #999;
-}
-
-button.highScore:hover {
-    background-color: #4f8A44;
-}
-
-button.highScore:active {
-    background-color: #4f8A44;
-    box-shadow: 3px 2px #666;
-    transform: translateY(2px);
-}
-
 button.next, button.prev {
     font-family: 'Press Start 2P', cursive;
     font-size: 1.3em;
@@ -66,6 +43,38 @@ footer {
     left: 50%;
     -ms-transform: translate(-50%);
     transform: translate(-50%);
+}
+
+
+.highScore {
+    text-align: center;
+    font-size: 0.8em;
+    font-family: 'Press Start 2P', cursive;
+    height: 1.5em;
+    padding-top: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    cursor: pointer;
+    user-select: none;
+    color: #FFF;
+    background-color: #4faf44;
+    border: none;
+    border-radius: 0.3em;
+    box-shadow: 3px 4px #999;
+}
+
+.highScore:hover {
+    background-color: #4f8A44;
+}
+
+.highScore:active {
+    background-color: #4f8A44;
+    box-shadow: 3px 2px #666;
+    transform: translateY(2px);
+}
+
+.highScore:focus {
+    outline: none;
 }
 
 .modal {

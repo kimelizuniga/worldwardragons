@@ -1,7 +1,7 @@
 <?php
 require_once("clsSQLConnection.php");
 
-if(isset($_POST['userName']))
+if(isset($_POST['userName']) && isset($_POST['pageNum']) != true)
 {
     $userName = $_POST['userName'];
     $score = $_POST['score'];

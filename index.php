@@ -152,7 +152,7 @@ function playSound(id, loop) {
 </head>
 <body onload="init();" style="margin:0px;">
 	<div class="button">
-		<button class="highScore" tabindex="-1" id="highScore">VIEW HIGHSCORE</button>
+		<div class="highScore" tabindex="-1" id="highScore">VIEW HIGHSCORE</div>
 	</div>
 	<div id="myModal" class="modal">
 		<section class="modal-content">
