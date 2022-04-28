@@ -24,13 +24,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FPXMX6ZB8X"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N01DGZ8H3X"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-FPXMX6ZB8X');
+  gtag('config', 'G-N01DGZ8H3X');
 </script>
 
 <style>
