@@ -19,6 +19,8 @@ nextBtn.addEventListener("click", goNext);
 
 currentYear.innerHTML = new Date().getFullYear();   
 
+getNumRows();
+
 function goPrev()
 {
     pageNum--;
@@ -28,7 +30,8 @@ function goPrev()
         pageNum = 0;
     }
 
-    showModal();
+    getData();
+    showNav();
 }
 
 function goNext()
@@ -41,10 +44,11 @@ function goNext()
 
     }
 
-    showModal();
+    getData();
+    showNav();
 }
 
-function showModal()
+function getNumRows()
 {
     // Get number of rows in database
     $.ajax({
@@ -56,7 +60,24 @@ function showModal()
             numRows = data;
         }
     });
+}
 
+function getData()
+{
+    // Grab data from database
+    $.ajax({
+        url: "highscore.php",
+        method: "POST",
+        data:{"pageNum": pageNum},
+        dataType: "html",
+        success: function (data) {
+            $("#row").html(data);
+        }
+    });
+}
+
+function showNav()
+{
     pageNeed = Math.ceil(numRows / 10) - 1;
 
     if(pageNum == 0)
@@ -76,17 +97,13 @@ function showModal()
     {
         nextBtn.style.display = 'inline-block';
     }
+}
 
-    // Grab data from database
-    $.ajax({
-        url: "highscore.php",
-        method: "POST",
-        data:{"pageNum": pageNum},
-        dataType: "html",
-        success: function (data) {
-            $("#row").html(data);
-        }
-    });
+function showModal()
+{
+    getNumRows();
+    getData();
+    showNav();
 
     // Show highscore
     modal.style.display = "block";
