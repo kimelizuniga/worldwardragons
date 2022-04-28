@@ -60,9 +60,9 @@ class clsSQLConnection
                 <div class=\"column-rank rank-number\">
                     $ranking
                 </div>
-                <div class=\"column userName\">
-                        $UserName
-                </div>
+                <div class=\"column userName\">" 
+                       . strtoupper($UserName) .
+                "</div>
                 <div class=\"column score\">
                     $Score
                 </div>"
