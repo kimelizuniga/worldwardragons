@@ -5,14 +5,14 @@ class clsSQLConnection
     public function CreateConnection()
     {
     // Get Heroku ClearDB connection information
-    $cleardb_url            = parse_url("postgres://worldwardragons_user:GAe03FCZFQUwngFBjmZF1NmsVERVUyhA@dpg-cfpo6tirrk0fd9vf0io0-a/worldwardragons");
+    $cleardb_url            = parse_url(getenv("CLEARDB_DATABASE_URL"));
     
     if(isset($cleardb_url["host"])) // if in heroku database
     {
-        $cleardb_server         = "dpg-cfpo6tirrk0fd9vf0io0-a";
-        $cleardb_username       = "worldwardragons_user";
-        $cleardb_password       = "GAe03FCZFQUwngFBjmZF1NmsVERVUyhA";
-        $cleardb_db             = "worldwardragons";
+        $cleardb_server         = $cleardb_url["host"];
+        $cleardb_username       = $cleardb_url["user"];
+        $cleardb_password       = $cleardb_url["pass"];
+        $cleardb_db             = substr($cleardb_url["path"], 1);
     
         $active_group = 'default';
         $query_builder = TRUE;
