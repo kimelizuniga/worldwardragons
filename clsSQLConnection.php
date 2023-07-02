@@ -18,7 +18,7 @@ class clsSQLConnection
         $query_builder = TRUE;
     
         // Connect to DB
-        $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
+        $conn = new mysqli($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
     }
     else
     {
