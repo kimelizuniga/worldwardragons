@@ -58,6 +58,9 @@ function getNumRows()
         dataType: "html",
         success: function (data) {
             numRows = data;
+        },
+        error: function(data) {
+            numRows = 0;
         }
     });
 
