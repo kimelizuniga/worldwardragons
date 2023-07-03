@@ -78,13 +78,14 @@ class clsSQLConnection
         $TableName = 'ww_dragons';
 
         $query = "Select COUNT(*) from $TableName where score > 0 order by score desc limit 50";
-        $stmt = $conn->prepare($query);
-        $stmt->execute();
-        $stmt->bind_result($count); 
+        $conn->query($query);
+        // $stmt = $conn->prepare($query);
+        // $stmt->execute();
+        // $stmt->bind_result($count); 
 
-        $stmt->fetch();
+        // $stmt->fetch();
     
-        echo "$count";
+        // echo "$count";
     }
 
     public function InsertData($userName, $score, $timeStamp)
@@ -94,15 +95,17 @@ class clsSQLConnection
         
         $query = "Insert into $TableName (user_name, score, date_played)
                                         Values (?, ?, ?)";
-        $stmt = $conn->prepare($query);
-        $BindSuccess = $stmt->bind_param("sis", $userName, $score, $timeStamp);
+        // $stmt = $conn->prepare($query);
+        // $BindSuccess = $stmt->bind_param("sis", $userName, $score, $timeStamp);
 
-        if ($BindSuccess)
-            $success = $stmt-> execute();
-        else
-            echo "Bind failed" . $stmt->error;
+        // if ($BindSuccess)
+        //     $success = $stmt-> execute();
+        // else
+        //     echo "Bind failed" . $stmt->error;
 
-        $stmt->close();
+        // $stmt->close();
+
+        $conn->query($query);
     }
 }
 
