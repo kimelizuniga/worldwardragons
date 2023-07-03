@@ -80,6 +80,9 @@ function getData()
         dataType: "html",
         success: function (data) {
             $("#row").html(data);
+        },
+        error: function (data) {
+            
         }
     });
 }
